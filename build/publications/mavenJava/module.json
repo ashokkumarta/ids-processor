@@ -1,0 +1,89 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "ashok.ids.processors",
+    "module": "ids-processor",
+    "version": "0.1-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 16,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "de.fhg.aisec.ids",
+          "module": "camel-idscp2",
+          "version": {
+            "requires": "0.4.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ids-processor-0.1-SNAPSHOT.jar",
+          "url": "ids-processor-0.1-SNAPSHOT.jar",
+          "size": 5019,
+          "sha512": "35b1bc5a50abbcb3769eb395a5f33f255a90ac082a55f58c5e69b9c0a2bab78f04cdbe2d29167d2b8bf53b95148fb6fd30aae93b8ff891b8f5309c0ede732f38",
+          "sha256": "63ab342e2fcea5ca63cd8bda7452c6f9757cffd27602a700157e68decc35d289",
+          "sha1": "eac78f57eb628ca47675318d0c5714f79cad8e23",
+          "md5": "45f7ff79d5b0a217d80bb176df9d9312"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 16,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "de.fhg.aisec.ids",
+          "module": "camel-idscp2",
+          "version": {
+            "requires": "0.4.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ids-processor-0.1-SNAPSHOT.jar",
+          "url": "ids-processor-0.1-SNAPSHOT.jar",
+          "size": 5019,
+          "sha512": "35b1bc5a50abbcb3769eb395a5f33f255a90ac082a55f58c5e69b9c0a2bab78f04cdbe2d29167d2b8bf53b95148fb6fd30aae93b8ff891b8f5309c0ede732f38",
+          "sha256": "63ab342e2fcea5ca63cd8bda7452c6f9757cffd27602a700157e68decc35d289",
+          "sha1": "eac78f57eb628ca47675318d0c5714f79cad8e23",
+          "md5": "45f7ff79d5b0a217d80bb176df9d9312"
+        }
+      ]
+    }
+  ]
+}
