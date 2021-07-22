@@ -1,21 +1,18 @@
-package ashok.ids.processors
+package tmf.ids.processors
 
 import de.fhg.aisec.ids.camel.idscp2.Constants.IDSCP2_HEADER
 import de.fhg.aisec.ids.camel.idscp2.ProviderDB
 import de.fhg.aisec.ids.camel.idscp2.Utils
 import de.fhg.aisec.ids.camel.idscp2.Utils.SERIALIZER
-import de.fraunhofer.iais.eis.ArtifactBuilder
-import de.fraunhofer.iais.eis.ArtifactRequestMessage
-import de.fraunhofer.iais.eis.ArtifactResponseMessageBuilder
-import de.fraunhofer.iais.eis.RejectionMessageBuilder
-import de.fraunhofer.iais.eis.RejectionReason
+import de.fraunhofer.iais.eis.*
 import org.apache.camel.Exchange
 import org.apache.camel.Processor
 import org.slf4j.LoggerFactory
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.util.*
 
-class XArtifactRequestProcessor : Processor {
+class TMFArtifactRequestProcessor : TMFProcessor() {
 
     override fun process(exchange: Exchange) {
         if (LOG.isDebugEnabled) {
@@ -25,25 +22,46 @@ class XArtifactRequestProcessor : Processor {
         val artifactRequestMessage = exchange.message.getHeader(
             IDSCP2_HEADER, ArtifactRequestMessage::class.java
         )
-        val requestedArtifact = artifactRequestMessage.requestedArtifact
-//        val transferContract = artifactRequestMessage.transferContract
 
-        // TODO: If transferContract doesn't match expected contract from database, send rejection!
+        val requestedArtifact = artifactRequestMessage.requestedArtifact
+
         val usedContract = ProviderDB.artifactUrisMapped2ContractAgreements[requestedArtifact]
+
         if (LOG.isDebugEnabled) {
-            LOG.debug("Contract for requested Artifact found {}", usedContract)
+            LOG.debug("Contract for requested Artifact found {}", usedontract)
         }
 
-        // if artifact is available/authorised create response else create rejection message
         if (!ProviderDB.availableArtifactURIs.containsKey(requestedArtifact)) {
             createRejectionMessage(exchange, artifactRequestMessage, RejectionReason.NOT_FOUND)
-        } else if (null != usedContract && !ProviderDB.contractAgreements.containsKey(usedContract)) {
+        } else if (!ProviderDB.contractAgreements.containsKey(usedContract)) {
             createRejectionMessage(exchange, artifactRequestMessage, RejectionReason.NOT_AUTHORIZED)
         } else {
+
+            val payLoad = exchange.getProperty(TMF_CONTENT_PAY_LOAD)?.let {
+                if (it is String) {
+                    it
+                } else {
+                    it.toString()
+                }
+            }?: TMF_CONTENT_NOT_FOUND
+
+            var data: ArrayList<DigitalContent> = ArrayList<DigitalContent>()
+            data.add(createDigitalContent(payLoad))
+            val artifactDate = Utils.createGregorianCalendarTimestamp(System.currentTimeMillis())
+
+            val rData = DataResourceBuilder().run {
+                _contentPart_(data)
+                _version_(TMF_CONTENT_MODEL_VERSION)
+                _created_(artifactDate)
+            }.build()
+
+            // create sample artifact
+
+
             // Proceed normally and send ArtifactResponseMessage
             ArtifactResponseMessageBuilder().run {
                 _correlationMessage_(artifactRequestMessage.id)
-                _transferContract_(usedContract)
+                _transferContract_(usedContract)            
                 let {
                     if (LOG.isDebugEnabled) {
                         LOG.debug("Serialisation header: {}", SERIALIZER.serialize(it.build()))
@@ -51,30 +69,9 @@ class XArtifactRequestProcessor : Processor {
                     exchange.message.setHeader(IDSCP2_HEADER, it)
                 }
             }
-
-            // create sample artifact
-            val artifactDate = Utils.createGregorianCalendarTimestamp(System.currentTimeMillis())
-        
-            val payLoad = exchange.getProperty("PAY_LOAD")?.let {
-                if (it is String) {
-                    it
-                } else {
-                    it.toString()
-                }
-            }
-            
-            val artifact = ArtifactBuilder()
-                ._byteSize_(BigInteger.valueOf(50000))
-                ._checkSum_("ABCDEFG-CHECKSUM")
-                ._creationDate_(artifactDate)
-                ._duration_(BigDecimal(5000))
-                //._fileName_("{\"app.name\":\"app.name\", \"msg.id\":\"uuid\", \"msg.generated.at\":\"time\", \"msg.text\":\"secret\"}")
-                ._fileName_(payLoad)
-                .build()
-
             LOG.debug("Before Serialisation body: ")
 
-            SERIALIZER.serialize(artifact).let {
+            SERIALIZER.serialize(rData).let {
                 if (LOG.isDebugEnabled) {
                     LOG.debug("Serialisation body: {}", it)
                 }
@@ -83,6 +80,7 @@ class XArtifactRequestProcessor : Processor {
             LOG.debug("After Serialisation body: ")
         }
     }
+
 
     private fun createRejectionMessage(
         exchange: Exchange,
@@ -104,6 +102,6 @@ class XArtifactRequestProcessor : Processor {
     }
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(XArtifactRequestProcessor::class.java)
+        private val LOG = LoggerFactory.getLogger(this::class.java)
     }
 }

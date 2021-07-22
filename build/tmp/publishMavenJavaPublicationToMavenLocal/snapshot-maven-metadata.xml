@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
-  <groupId>ashok.ids.processors</groupId>
-  <artifactId>ids-processor</artifactId>
+  <groupId>tmf.ids.processors</groupId>
+  <artifactId>tmf-ids-processors</artifactId>
   <version>0.1-SNAPSHOT</version>
   <versioning>
     <snapshot>
       <localCopy>true</localCopy>
     </snapshot>
-    <lastUpdated>20210715050537</lastUpdated>
+    <lastUpdated>20210721151007</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
-        <extension>pom</extension>
+        <extension>module</extension>
         <value>0.1-SNAPSHOT</value>
-        <updated>20210715050537</updated>
+        <updated>20210721151007</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
         <value>0.1-SNAPSHOT</value>
-        <updated>20210715050537</updated>
+        <updated>20210721151007</updated>
       </snapshotVersion>
       <snapshotVersion>
-        <extension>module</extension>
+        <extension>pom</extension>
         <value>0.1-SNAPSHOT</value>
-        <updated>20210715050537</updated>
+        <updated>20210721151007</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
