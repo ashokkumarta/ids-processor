@@ -28,7 +28,7 @@ class TMFArtifactRequestProcessor : TMFProcessor() {
         val usedContract = ProviderDB.artifactUrisMapped2ContractAgreements[requestedArtifact]
 
         if (LOG.isDebugEnabled) {
-            LOG.debug("Contract for requested Artifact found {}", usedontract)
+            LOG.debug("Contract for requested Artifact found {}", usedContract)
         }
 
         if (!ProviderDB.availableArtifactURIs.containsKey(requestedArtifact)) {
