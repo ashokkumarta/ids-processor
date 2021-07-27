@@ -38,11 +38,11 @@
         {
           "name": "tmf-ids-processors-0.1-SNAPSHOT.jar",
           "url": "tmf-ids-processors-0.1-SNAPSHOT.jar",
-          "size": 25810,
-          "sha512": "82df00e7346d1cb5294fee36ef773f2ccd51e9b324c6fe9f07a3726d59b0ce2550a622a0d0f20ba5ab6c20f29a3fd4e0e37dd8fe17e6c547bbed44c98a0998a4",
-          "sha256": "045b152c664d589439b3b15264beaf0f8fc62c6a64727d5dcb0d503c1a59e760",
-          "sha1": "9f7da5252c1559ea4ddb1f994f285096e474e315",
-          "md5": "b6ce31f9fdf1646fe7aecd98c2987410"
+          "size": 31018,
+          "sha512": "640d02e1f2ac81c7f73bbf8fd2b145a936ba2dcc3d258ba6ee83a1cfa9cff8e92c8ef80d37ee53fe45e1c6aa5641840231050418e1bf7db62bfb296c75305e8b",
+          "sha256": "fe8bd1b35755831ed05043f5d6c3d3d10e496d08b7b73c38c869d41fe5b2d5cf",
+          "sha1": "730466a6b91a7abcf2dfb838426429263fec6fcf",
+          "md5": "bd35a6b5c192eacdb9771c62ec3b2985"
         }
       ]
     },
@@ -77,11 +77,11 @@
         {
           "name": "tmf-ids-processors-0.1-SNAPSHOT.jar",
           "url": "tmf-ids-processors-0.1-SNAPSHOT.jar",
-          "size": 25810,
-          "sha512": "82df00e7346d1cb5294fee36ef773f2ccd51e9b324c6fe9f07a3726d59b0ce2550a622a0d0f20ba5ab6c20f29a3fd4e0e37dd8fe17e6c547bbed44c98a0998a4",
-          "sha256": "045b152c664d589439b3b15264beaf0f8fc62c6a64727d5dcb0d503c1a59e760",
-          "sha1": "9f7da5252c1559ea4ddb1f994f285096e474e315",
-          "md5": "b6ce31f9fdf1646fe7aecd98c2987410"
+          "size": 31018,
+          "sha512": "640d02e1f2ac81c7f73bbf8fd2b145a936ba2dcc3d258ba6ee83a1cfa9cff8e92c8ef80d37ee53fe45e1c6aa5641840231050418e1bf7db62bfb296c75305e8b",
+          "sha256": "fe8bd1b35755831ed05043f5d6c3d3d10e496d08b7b73c38c869d41fe5b2d5cf",
+          "sha1": "730466a6b91a7abcf2dfb838426429263fec6fcf",
+          "md5": "bd35a6b5c192eacdb9771c62ec3b2985"
         }
       ]
     }
