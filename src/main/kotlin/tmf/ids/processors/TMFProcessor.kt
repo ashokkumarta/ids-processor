@@ -19,7 +19,9 @@ val TMF_CONTENT_UID_KEY = "tmf_content_uid"
 val TMF_CONTENT_PROVIDER_EMAIL_KEY = "tmf_content_provider_email"
 val TMF_CONTENT_PROVIDER_PRIMARY_PHONE_KEY = "tmf_content_provider_primary_phone"
 val TMF_CONTENT_PROVIDER_QUOTE_KEY = "tmf_content_provider_quote"
+val TMF_CONTENT_PROVIDER_QUOTE_MASKED_KEY = "tmf_content_provider_quote_masked"
 val TMF_CONTENT_PAY_LOAD = "tmf_content_pay_load"
+val TMF_CONTENT_PROVIDER_PRIMARY_PHONE_MASKED_KEY = "tmf_content_provider_primary_phone_masked"
 
 val TMF_CONTENT_MODEL = "TMF Generic Model"
 val TMF_CONTENT_MODEL_VERSION = "0.1-ex"
@@ -28,7 +30,9 @@ val TMF_CONTENT_USAGE_TNC = "TMF or its participants assume no responsibility an
 val TMF_CONTENT_NOT_FOUND = "Could not serve the requested content."
 val TMF_CONTENT_PROVIDER_EMAIL = "Confidential@Secret.org"
 val TMF_CONTENT_PROVIDER_PRIMARY_PHONE = "123-456-7890"
+val TMF_CONTENT_PROVIDER_PRIMARY_PHONE_MASKED = "123-XXX-XX90"
 val TMF_CONTENT_PROVIDER_QUOTE = "49.95"
+val TMF_CONTENT_PROVIDER_QUOTE_MASKED = "**.**"
 
 
 open class TMFProcessor : Processor {
@@ -67,6 +71,7 @@ open class TMFProcessor : Processor {
     private fun createDigitalContent() : DigitalContent {
         // create sample artifact
         val artifactDate = Utils.createGregorianCalendarTimestamp(System.currentTimeMillis())
+        val random = Random()
 
         val dc = DataResourceBuilder().build()
         dc.setProperty(TMF_CONTENT_MODEL_KEY, TMF_CONTENT_MODEL)
@@ -77,8 +82,17 @@ open class TMFProcessor : Processor {
         dc.setProperty(TMF_CONTENT_UID_KEY, UUID.randomUUID())
 
         dc.setProperty(TMF_CONTENT_PROVIDER_EMAIL_KEY, TMF_CONTENT_PROVIDER_EMAIL)
-        dc.setProperty(TMF_CONTENT_PROVIDER_PRIMARY_PHONE_KEY, TMF_CONTENT_PROVIDER_PRIMARY_PHONE)
-        dc.setProperty(TMF_CONTENT_PROVIDER_QUOTE_KEY, TMF_CONTENT_PROVIDER_QUOTE)
+        if(random.nextBoolean()) {
+            dc.setProperty(TMF_CONTENT_PROVIDER_PRIMARY_PHONE_KEY, TMF_CONTENT_PROVIDER_PRIMARY_PHONE)
+        } else {
+            dc.setProperty(TMF_CONTENT_PROVIDER_PRIMARY_PHONE_MASKED_KEY, TMF_CONTENT_PROVIDER_PRIMARY_PHONE_MASKED)
+        }
+
+        if(random.nextBoolean()) {
+            dc.setProperty(TMF_CONTENT_PROVIDER_QUOTE_KEY, TMF_CONTENT_PROVIDER_QUOTE)
+        } else {
+            dc.setProperty(TMF_CONTENT_PROVIDER_QUOTE_MASKED_KEY, TMF_CONTENT_PROVIDER_QUOTE_MASKED)
+        }
 
         return dc
     }
